@@ -40,8 +40,8 @@
 
   // const authorizedExtensions = ['.jpg', '.jpeg', '.png', '.webp'];
 
-  function upload() {
-    let photo = document.getElementById("img").files[0];
+  function upload(e) {
+    let photo = e.target.files[0];
     console.log(photo, photo.name, photo.type);
     let formData = new FormData();
     formData.append("photo", photo);
@@ -58,9 +58,9 @@
   id="img"
   accept=".jpg,.png" 
   placeholder="upload image"
-  on:change={() => {
+  on:change={(e) => {
     console.log("upload kon");
-    upload();
+    upload(e);
   }}
 />
 
