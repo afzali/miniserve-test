@@ -38,17 +38,46 @@
   //     });
   // }
 
-
   // const authorizedExtensions = ['.jpg', '.jpeg', '.png', '.webp'];
+
+  function upload() {
+    let photo = document.getElementById("img").files[0];
+    console.log(photo, photo.name, photo.type);
+    let formData = new FormData();
+    formData.append("photo", photo);
+    fetch("http://127.0.0.1:8080/upload?path=/", {
+      method: "POST",
+      body: formData,
+      enctype: "multipart/form-data",
+    });
+  }
 </script>
 
+<input
+  type="file"
+  id="img"
+  accept=".jpg,.png" 
+  placeholder="upload image"
+  on:change={() => {
+    console.log("upload kon");
+    upload();
+  }}
+/>
 
-<form action="http://localhost:8080/upload?path=/" method="post" enctype="multipart/form-data">
+<form
+  action="http://localhost:8080/upload?path=/"
+  method="post"
+  enctype="multipart/form-data"
+>
   <input type="file" name="avatar" placeholder="avatar" />
   <button type="submit">upload</button>
 </form>
 
-<form action="http://localhost:8080/upload?path=/" method="post" enctype="multipart/form-data">
-  <input type="hidden" name="mkdir" value="test2"/>
+<form
+  action="http://localhost:8080/upload?path=/"
+  method="post"
+  enctype="multipart/form-data"
+>
+  <input type="hidden" name="mkdir" value="test2" />
   <button type="submit">create</button>
 </form>
